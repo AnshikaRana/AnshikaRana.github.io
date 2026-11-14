@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anshika Rana</title>
+<meta name="description" content="Anshika Rana, final-year B.Tech CSE (AI) at IGDTUW. Projects, research and internships in applied machine learning, read left to right.">
+<meta name="author" content="Anshika Rana">
+<meta name="theme-color" content="#F4F1E8">
+<link rel="canonical" href="https://anshikarana.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anshikarana.github.io/">
+<meta property="og:title" content="Anshika Rana">
+<meta property="og:description" content="Final-year B.Tech CSE (AI) at IGDTUW. Projects, research and internships in applied machine learning.">
+<meta property="og:image" content="https://anshikarana.github.io/assets/share-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F4F1E8; --paper-2:#EBE6D9; --card:#FCFAF4;
+    --ink:#15191A; --ink-2:#474E4C; --ink-3:#837E72; --line:#D8D1C0;
+    --teal:#0E6B63; --indigo:#4335A0; --ochre:#BD8418; --flag:#DC4327;
+    --teal-rgb:14,107,99; --indigo-rgb:67,53,160; --ochre-rgb:189,132,24; --flag-rgb:220,67,39;
+    --display:"Spectral","TeX Gyre Pagella",Palatino,Georgia,serif;
+    --text:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);
+    font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .rail{height:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-x:contain}
+  .rail::-webkit-scrollbar{display:none}
+  .track{display:flex;align-items:stretch;height:100%;position:relative;width:max-content}
+  .field{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .field svg{position:absolute;top:0;left:0}
+  .zonewash{position:absolute;top:0;bottom:0;pointer-events:none}
+  .plate{position:absolute;top:50%;transform:translate(0,-50%);opacity:.16;margin:0;
+    filter:saturate(.12);mix-blend-mode:multiply;will-change:transform;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
+  .plate img{display:block;width:100%;height:auto}
+  /* the portrait sits in the gap beside the name and the programme block,
+     clear of the signal line that runs along the foot of the panel */
+  .portrait{position:absolute;right:24%;top:7%;
+    height:min(70%,640px);width:auto;max-width:30vw;opacity:.88;margin:0;pointer-events:none;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 66%,transparent 100%);
+    mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 66%,transparent 100%)}
+  /* the figure keeps its edges; the wall behind it dissolves into the paper */
+  .portrait img{display:block;height:100%;width:auto;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 15%,#000 85%,transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 15%,#000 85%,transparent 100%)}
+  html.stacked .portrait{display:none}
+  .panel{position:relative;z-index:1;flex:0 0 auto;height:100%;
+    padding:70px 70px 150px;display:flex;flex-direction:column;justify-content:center;
+    }
+  .annot{font-family:var(--display);font-style:italic;font-size:14.5px;color:var(--ink-3)}
+
+  /* opening */
+  .p-open{width:100vw;min-width:1120px;padding-right:90px}
+  .masth{font-size:13.5px;color:var(--teal);margin:0 0 26px;display:flex;align-items:center;gap:12px}
+  .masth::after{content:"";height:1px;width:120px;background:var(--teal);opacity:.4}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(62px,12vh,104px);line-height:.86;
+    letter-spacing:-.025em;margin:0 0 4px}
+  h1 em{font-style:italic;display:block;margin-left:.88em}
+  .claim{font-family:var(--display);font-size:clamp(18px,2.9vh,25px);line-height:1.42;max-width:28ch;
+    margin:clamp(18px,4vh,36px) 0 0;color:var(--ink-2)}
+  .claim b{font-weight:400;color:var(--ink);background:linear-gradient(transparent 62%,rgba(var(--ochre-rgb),.3) 62%)}
+  .meta{display:flex;gap:46px;margin:clamp(20px,4.4vh,40px) 0 clamp(18px,3.7vh,34px);
+    padding-top:clamp(12px,2.4vh,22px);border-top:1px solid var(--line)}
+  .meta div span{display:block;font-size:12.5px;color:var(--ink-3);margin-bottom:3px}
+  .meta div b{font-family:var(--display);font-weight:400;font-size:17px;color:var(--ink)}
+  .links{display:flex;gap:9px;flex-wrap:wrap}
+  .btn{font-size:14.5px;padding:11px 17px;border:1px solid var(--ink);background:var(--ink);
+    color:var(--card);text-decoration:none;border-radius:1px}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+  .hint{position:absolute;left:70px;bottom:30px;font-size:13px;color:var(--ink-3);
+    display:flex;align-items:center;gap:11px}
+  .hint i{display:block;width:54px;height:1px;background:var(--teal);position:relative;font-style:normal}
+  .hint i::after{content:"";position:absolute;right:0;top:-3px;border-left:7px solid var(--teal);
+    border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
+
+  /* chapter marks */
+  .p-mark{width:300px;justify-content:flex-end;padding-bottom:236px}
+  .p-mark .n{font-family:var(--display);font-style:italic;font-size:58px;line-height:1;color:#C8C0AC;margin:0 0 auto}
+  .p-mark h2{font-family:var(--display);font-weight:400;font-size:38px;line-height:1.06;
+    letter-spacing:-.01em;margin:0 0 14px}
+  .p-mark h2 em{font-style:italic}
+  .p-mark p{font-size:15px;color:var(--ink-2);margin:0;max-width:28ch}
+  .p-mark .hue{width:52px;height:3px;margin:0 0 20px}
+
+  /* lead project composition */
+  .p-lead{width:1460px}
+  .figwrap{display:grid;grid-template-columns:400px 1fr;gap:56px;align-items:center}
+  .figlead h3{font-family:var(--display);font-weight:400;font-size:46px;line-height:1.02;
+    letter-spacing:-.02em;margin:0 0 6px}
+  .figlead .cred{font-size:13px;color:var(--ink-3);margin:0 0 20px}
+  .figlead p{font-size:16px;line-height:1.6;color:var(--ink-2);margin:0 0 20px}
+  .openlink{font-size:14px;color:var(--teal);background:none;border:0;padding:9px 0 0;
+    border-top:1px solid var(--line);font-family:var(--text);cursor:pointer;width:100%;text-align:left}
+  .openlink:hover{color:var(--ink)}
+
+  /* entry rows */
+  .p-rows{width:1180px}
+  .rows{display:grid;grid-template-columns:1fr 1fr;gap:34px 48px}
+  .rows2{margin-top:40px;gap:28px 48px}
+  .entry{background:none;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer;
+    padding:0 0 20px;border-bottom:1px solid var(--line)}
+  .entry h4{font-family:var(--display);font-weight:400;font-size:27px;line-height:1.08;margin:0 0 4px}
+  .entry .cred{font-size:12.5px;color:var(--ink-3);margin:0 0 9px}
+  .entry p{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin:0 0 10px}
+  .entry .go{font-size:13px;color:var(--teal)}
+  .entry:hover h4{color:var(--teal)}
+  .entry.ix:hover h4,.entry.ix .go{color:var(--indigo)}
+  .entry .flagme{display:inline-block;font-size:11.5px;color:var(--flag);
+    border:1px solid rgba(var(--flag-rgb),.45);padding:1px 7px;margin-left:8px;vertical-align:2px}
+
+  /* research matrix */
+  .p-matrix{width:100vw;min-width:1120px;justify-content:center;
+    padding-top:36px;padding-bottom:calc(16.5vh + 70px)}
+  .p-matrix2{min-width:1000px}
+  html.stacked .rband h3{font-size:34px}
+  html.stacked .rband.lite h3{font-size:24px}
+  html.stacked .rband p,html.stacked .rband.lite p{font-size:17px}
+  html.stacked .rband .cred{font-size:14px}
+  html.stacked table.mx td{font-size:18px}
+  .rstack{display:flex;flex-direction:column;gap:14px;width:100%}
+  .rband{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,53%);gap:46px;align-items:center}
+  .rsub{display:flex;flex-direction:column;gap:10px}
+  .rband.lite{grid-template-columns:minmax(0,33%) minmax(0,1fr);gap:44px;align-items:start;
+    padding-top:11px;border-top:1px solid var(--line)}
+  button.rband{background:none;border:0;border-top:1px solid var(--line);font:inherit;
+    color:inherit;text-align:left;cursor:pointer;width:100%;padding:11px 0 0}
+  button.rband:hover h3{color:var(--indigo)}
+  .rband .go{font-size:clamp(13px,2vh,16px);color:var(--indigo);display:inline-block}
+  .rband .kind{font-size:clamp(12px,1.85vh,14.5px);color:var(--teal);margin:4px 0 0}
+  html.stacked .rband .kind{font-size:13px}
+  .rnum{font-family:var(--display);font-style:italic;color:var(--indigo);
+    font-size:clamp(15px,2.3vh,19px);margin:0 0 7px;
+    display:flex;align-items:center;gap:11px;line-height:1}
+  .rnum::after{content:"";height:1px;width:36px;background:var(--indigo);opacity:.32}
+  .rband.lite .rnum{font-size:clamp(13px,2vh,16px);margin:0 0 5px}
+  .rband h3{font-family:var(--display);font-weight:400;line-height:1.04;
+    letter-spacing:-.02em;margin:0 0 9px;font-size:clamp(31px,5.7vh,47px)}
+  .rband.lite h3{font-size:clamp(20px,3.25vh,26px);line-height:1.16}
+  .rband .cred{font-size:clamp(12.5px,1.92vh,15.5px);color:var(--ink-3);margin:0 0 13px}
+  .rband.lite .cred{margin:0 0 9px}
+  .rband p{font-size:clamp(15.5px,2.5vh,20px);line-height:1.56;color:var(--ink-2);margin:0 0 14px}
+  .rband.lite p{font-size:clamp(14.5px,2.32vh,18.5px);line-height:1.52;margin:0 0 12px}
+  .rband .openlink{color:var(--indigo)}
+  .rband .flagme{display:inline-block;font-size:11.5px;color:var(--flag);
+    border:1px solid rgba(var(--flag-rgb),.45);padding:1px 7px;margin-left:8px;vertical-align:3px}
+  .rband>*,.figwrap>*,.rows>*{min-width:0}
+  html.stacked .p-matrix{justify-content:flex-start;padding-top:44px;padding-bottom:44px}
+  html.stacked .p-open{padding-right:max(16px,env(safe-area-inset-right,0px))}
+  html.stacked h1{font-size:62px}
+  html.stacked .claim{font-size:20px}
+  html.stacked .rband,html.stacked .rband.lite{grid-template-columns:1fr;gap:18px}
+  table.mx{border-collapse:collapse;font-size:14px;width:100%}
+  table.mx caption{text-align:left;font-size:13px;color:var(--ink-3);padding-bottom:12px;caption-side:top}
+  table.mx th{font-weight:500;font-size:12.5px;color:var(--ink-3);padding:8px 10px;text-align:center;
+    border-bottom:1px solid var(--line)}
+  table.mx th.rowh{text-align:left;font-family:var(--display);font-size:14px;color:var(--ink-2);
+    font-weight:400;white-space:nowrap;border-bottom:0;border-right:1px solid var(--line)}
+  table.mx td{padding:8px 9px;text-align:center;font-variant-numeric:tabular-nums;
+    font-family:var(--display);font-size:clamp(15px,2.55vh,20.5px);border:2px solid var(--paper)}
+  table.mx td small{display:block;font-family:var(--text);font-size:10.5px;color:var(--ink-2);
+    margin-top:2px;font-variant-numeric:normal}
+  table.mx td.native{outline:1.5px solid var(--ochre);outline-offset:-3px}
+  .scalekey{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-3);margin-top:10px}
+  .scalekey i{display:block;width:120px;height:8px;font-style:normal;
+    background:linear-gradient(90deg,rgba(var(--indigo-rgb),.05),rgba(var(--indigo-rgb),.45))}
+
+  /* degree */
+  .p-degree{width:2600px;padding-left:46px;padding-right:46px;justify-content:center}
+  .stations{display:flex;align-items:stretch}
+  .st{flex:0 0 252px;border-right:1px dotted var(--line);padding:0 20px;display:flex;flex-direction:column}
+  .st:last-child{border-right:0}
+  .st .lbl{font-size:12.5px;color:var(--ink-3);margin-bottom:9px}
+  .st .gpa{font-family:var(--display);font-weight:400;font-size:46px;line-height:.95;
+    letter-spacing:-.03em;margin-bottom:3px}
+  .st .state{font-size:12px;color:var(--ink-3);margin-bottom:18px}
+  .st.now .state{color:var(--flag)}
+  .st.now .gpa,.st.ahead .gpa{color:var(--ink-3)}
+  .st ul{margin:0;padding:0;list-style:none}
+  .st li{border-top:1px solid var(--line)}
+  .st li button{display:flex;justify-content:space-between;gap:10px;align-items:baseline;width:100%;
+    background:none;border:0;font:inherit;color:var(--ink-2);font-size:12.5px;line-height:1.4;
+    padding:7px 0;cursor:pointer;text-align:left}
+  .st li button i{font-style:normal;font-size:12px;color:var(--ink-3);flex:none}
+  .st li button:hover,.st li button:focus-visible{color:var(--ochre);outline:none}
+  .st li button[data-has="1"] span{border-bottom:1px solid rgba(189,132,24,.4)}
+  .st li.key button{color:var(--ink)}
+  .st li.key button i{color:var(--ochre)}
+  .legend{flex:0 0 352px;padding:0 22px 0 30px;border-left:1px solid var(--line);margin-left:10px}
+  .legend h4{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 4px;line-height:1.1}
+  .legend .lead{font-size:13px;color:var(--ink-3);margin:0 0 16px;line-height:1.45}
+  .legend table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .legend td{padding:5px 0;border-top:1px solid var(--line);color:var(--ink-2)}
+  .legend td:nth-child(2){font-family:var(--display);font-size:14px;color:var(--ink);width:38px}
+  .legend td:nth-child(3){text-align:right;font-family:var(--display);font-size:14px;color:var(--ochre);width:34px}
+  .legend .formula{margin:16px 0 0;padding-top:12px;border-top:1px solid var(--line);
+    font-family:var(--display);font-style:italic;font-size:13.5px;color:var(--ink-3);line-height:1.5}
+  .legend .formula b{font-style:normal;font-weight:400;color:var(--ink-2)}
+  .dfoot{position:absolute;left:46px;right:46px;bottom:64px;
+    display:flex;gap:44px;align-items:baseline;margin-top:0;padding-top:16px;
+    border-top:1px solid var(--line);font-size:14px;color:var(--ink-3)}
+  .dfoot b{font-family:var(--display);font-weight:400;font-size:20px;color:var(--ink)}
+
+  /* close */
+  .p-close{width:660px;background:var(--ink);color:var(--card)}
+  .p-close h2{font-family:var(--display);font-weight:400;font-size:52px;line-height:.98;
+    margin:0 0 18px;letter-spacing:-.02em}
+  .p-close h2 em{font-style:italic}
+  .p-close p{font-size:17px;color:rgba(252,250,244,.7);max-width:32ch;margin:0 0 30px}
+  .p-close a{display:block;color:var(--card);text-decoration:none;font-size:17px;padding:13px 0;
+    border-bottom:1px solid rgba(252,250,244,.18)}
+  .p-close a:hover{padding-left:10px;border-bottom-color:var(--card)}
+  .p-close a.pdf{color:#F2C879}
+
+  /* chrome */
+  .prog{position:fixed;left:0;right:0;bottom:0;height:50px;background:var(--card);
+    border-top:1px solid var(--line);display:flex;align-items:center;gap:26px;padding:0 24px;
+    font-size:12.5px;z-index:20}
+  .prog button{background:none;border:0;font:inherit;color:var(--ink-3);cursor:pointer;padding:4px 0}
+  .prog button.on{color:var(--ink)}
+  .bar{flex:1;height:2px;background:var(--line);position:relative}
+  .thumb{position:absolute;top:0;left:0;height:2px;background:var(--teal);width:14%}
+
+  /* modal */
+  .scrim{position:fixed;inset:0;background:rgba(21,25,26,.42);backdrop-filter:blur(2px);
+    display:none;align-items:center;justify-content:center;padding:44px;z-index:40}
+  .scrim.open{display:flex}
+  .sheet{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--teal);
+    width:min(900px,100%);max-height:84vh;overflow:auto;padding:40px 46px 32px;
+    box-shadow:0 30px 70px -28px rgba(0,0,0,.4)}
+  .sheet.r{border-top-color:var(--indigo)} .sheet.c{border-top-color:var(--ochre)}
+  .sheet .tag{font-size:13px;color:var(--teal);margin:0 0 8px}
+  .sheet.r .tag{color:var(--indigo)} .sheet.c .tag{color:var(--ochre)}
+  .sheet h3{font-family:var(--display);font-weight:400;font-size:40px;line-height:1.04;
+    letter-spacing:-.022em;margin:0 0 6px}
+  .sheet .sub{font-size:14px;color:var(--ink-3);margin:0 0 24px}
+  .sheet .brief{font-family:var(--display);font-size:19px;line-height:1.55;color:var(--ink-2);
+    max-width:60ch;margin:0 0 22px}
+  .sheet .para{font-size:15.5px;line-height:1.62;color:var(--ink-2);max-width:66ch;margin:0 0 16px}
+  .sheet h5{font-size:12.5px;color:var(--ink-3);margin:28px 0 10px;font-weight:500}
+  .statrow{display:flex;gap:34px;flex-wrap:wrap;margin:22px 0 4px;padding-top:16px;border-top:1px solid var(--line)}
+  .statrow div b{display:block;font-family:var(--display);font-size:25px;line-height:1.1;
+    font-variant-numeric:tabular-nums}
+  .statrow div span{display:block;font-size:12px;color:var(--ink-3);margin-top:2px;max-width:15ch;line-height:1.3}
+  .u,.l{display:grid;grid-template-columns:76px 1fr;gap:20px;padding:12px 0;font-size:15px;
+    line-height:1.55;color:var(--ink-2);max-width:70ch;border-top:1px solid var(--line)}
+  .u i,.l i{font-style:italic;font-family:var(--display);font-size:14px;color:var(--ink-3);padding-top:2px}
+  .l i{color:var(--ochre)}
+  .plainnote{font-size:14.5px;line-height:1.62;color:var(--ink-2);margin:4px 0 0;
+    padding:13px 16px;background:rgba(14,107,99,.05);border-left:2px solid var(--teal)}
+  .note{margin:22px 0 0;padding:12px 14px;background:rgba(var(--flag-rgb),.06);
+    border-left:2px solid var(--flag);font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+  .note b{color:var(--flag);font-weight:500}
+  ul.team{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 26px}
+  ul.team li{font-size:14.5px;color:var(--ink-2);padding-left:14px;position:relative}
+  ul.team li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;
+    border-radius:50%;background:var(--teal)}
+  ul.team li:first-child{color:var(--ink);font-weight:500}
+  ul.team li:first-child::before{background:var(--flag)}
+  .pending{color:var(--ink-3);font-style:italic}
+  .deck{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  html.stacked .deck{grid-template-columns:1fr}
+  .slide{margin:0;position:relative;min-width:0}
+  .slide img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+  .slide figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--card);
+    font-size:11px;padding:2px 7px;font-variant-numeric:tabular-nums}
+  .deckcap{font-size:12.5px;color:var(--ink-3);margin:10px 0 0}
+  .certs{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  html.stacked .certs{grid-template-columns:1fr}
+  .certfig{margin:0;min-width:0}
+  .certfig img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+  .certfig figcaption{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+  .sheetlinks{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+  .sheetlinks a{font-size:14px;padding:9px 15px;border:1px solid var(--line);color:var(--ink);
+    text-decoration:none}
+  .sheetlinks a:hover{border-color:var(--teal);color:var(--teal)}
+  .sfoot{display:flex;justify-content:flex-end;margin-top:26px;padding-top:16px;border-top:1px solid var(--line)}
+  .sfoot button{background:var(--ink);color:#fff;border:0;padding:10px 20px;font-size:14px;cursor:pointer}
+
+  /* ---- stacked layout: applied by width OR by the viewer's own choice ---- */
+  html.stacked, html.stacked body{height:auto;overflow:visible}
+  html.stacked .field{display:none}
+  html.stacked .rail{height:auto;overflow:visible;scroll-snap-type:none}
+  html.stacked .track{display:block;width:auto;height:auto}
+  html.stacked .panel{width:auto!important;min-width:0!important;height:auto;min-height:0;
+    padding:44px max(16px,env(safe-area-inset-left,0px)) 44px max(16px,env(safe-area-inset-right,0px));
+    border-bottom:1px solid var(--line);justify-content:flex-start}
+  html.stacked h1{font-size:clamp(44px,13vw,72px)}
+  html.stacked h1 em{margin-left:0}
+  html.stacked .claim{font-size:19px;max-width:none}
+  html.stacked .meta{flex-wrap:wrap;gap:18px 32px}
+  html.stacked .hint{position:static;margin-top:28px}
+  html.stacked .p-mark{padding-bottom:44px;justify-content:flex-start}
+  html.stacked .p-mark .n{margin:0 0 12px}
+  html.stacked .p-mark h2,html.stacked .p-mark p{max-width:none}
+  html.stacked .figwrap,html.stacked .mwrap{grid-template-columns:1fr;gap:28px}
+  html.stacked .figlead h3{font-size:34px}
+  html.stacked .rows{grid-template-columns:1fr;gap:24px}
+  html.stacked #dishafig{width:100%;height:auto}
+  html.stacked .scroller,html.stacked .mxwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  html.stacked .stations{min-width:max-content}
+  html.stacked table.mx{font-size:12px;min-width:460px}
+  html.stacked table.mx td{font-size:15px;padding:9px 6px}
+  html.stacked table.mx td small{font-size:9.5px}
+  html.stacked .dfoot{position:static;flex-wrap:wrap;gap:16px 28px;margin-top:26px}
+  html.stacked .prog{gap:14px;padding:0 12px;overflow-x:auto}
+  html.stacked .prog .bar,html.stacked .prog .keys{display:none}
+  html.stacked .p-close h2{font-size:38px}
+  html.stacked .sheet{padding:26px 20px 22px;max-height:88vh}
+  html.stacked .sheet h3{font-size:30px}
+  html.stacked .u,html.stacked .l{grid-template-columns:58px 1fr;gap:12px}
+  html.stacked .scrim{padding:14px}
+  html.stacked body{padding-bottom:58px}
+  .layout-toggle{background:none;border:1px solid var(--line);color:var(--ink-2);
+    font:inherit;font-size:12px;padding:5px 11px;cursor:pointer;white-space:nowrap}
+  .layout-toggle:hover{border-color:var(--teal);color:var(--teal)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="rail" id="rail"><div class="track" id="trk">
+
+  <div class="field" id="field">
+    <figure class="plate" id="plate2"><img src="assets/disha-arch.webp" alt=""></figure>
+    <figure class="plate" id="plate"><img src="assets/arch.webp" alt=""></figure>
+    <svg id="sig" aria-hidden="true"></svg>
+  </div>
+
+  <section class="panel p-open" id="s0">
+    <figure class="portrait"><img src="assets/portrait.webp" alt=""></figure>
+    <h1>Anshika<em>Rana</em></h1>
+    <p class="claim">I build machines that read: literature in one project, students in another. I keep a person in the loop wherever the reading is <b>about someone's life</b>.</p>
+    <div class="meta">
+      <div><span>Programme</span><b>B.Tech CSE (AI), IGDTUW</b></div>
+      <div><span>Final year</span><b>Graduating June 2027</b></div>
+    </div>
+    <div class="links">
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Open resume</a>
+      <a class="btn ghost" href="https://github.com/AnshikaRana" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/anshika-rana-02a4b6289/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <section class="panel p-mark">
+    <p class="n">i</p><div class="hue" style="background:var(--teal)"></div>
+    <h2>Things I have <em>built</em></h2>
+    <p>Systems that interpret something on a person's behalf, and hand the decision back.</p>
+  </section>
+
+  <section class="panel p-lead" id="s1">
+    <div class="figwrap">
+      <div class="figlead">
+        <h3>Disha</h3>
+        <p class="cred">AI First Hackathon 2026 · I3C IIT Jammu × Techible · second runner-up · team of three</p>
+        <p>Coaching institutions lose students who were visible for months beforehand: attendance slipping, scores drifting, fees late. Disha reads the signals the institution already collects and raises a flag.</p>
+        <p>What it does not do is produce a number and call that an answer. Every flag arrives at a counsellor with its reasoning attached, and the counsellor decides what happens next.</p>
+        <button class="openlink" data-open="p:disha">Open the full project →</button>
+      </div>
+      <svg id="dishafig" viewBox="0 0 760 420" role="img"
+           aria-label="Diagram: attendance, test scores and fee delays feed a risk model; flagged cases pass to a counsellor who decides.">
+        <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6" fill="none" stroke="#474E4C" stroke-width="1.2"/></marker></defs>
+        <g font-family="Inter,sans-serif" font-size="13" fill="#474E4C">
+          <text x="0" y="70">Attendance</text><text x="0" y="146">Test scores</text>
+          <text x="0" y="222">Fee delays</text><text x="0" y="298" fill="#837E72">Engagement</text></g>
+        <g stroke="#474E4C" stroke-width="1.2" fill="none" marker-end="url(#ar)">
+          <path d="M96,66 C150,66 150,170 196,176"/><path d="M96,142 C150,142 155,172 196,180"/>
+          <path d="M96,218 C150,218 155,190 196,186"/><path d="M96,294 C150,294 160,200 196,192"/></g>
+        <rect x="200" y="140" width="152" height="80" fill="#FCFAF4" stroke="#0E6B63" stroke-width="1.6"/>
+        <text x="276" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" fill="#15191A">Risk model</text>
+        <text x="276" y="196" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#837E72">dropout · wellbeing</text>
+        <path d="M352,180 L430,180" stroke="#474E4C" stroke-width="1.2" marker-end="url(#ar)"/>
+        <line x1="438" y1="40" x2="438" y2="330" stroke="#DC4327" stroke-width="1.3" stroke-dasharray="4 5"/>
+        <text x="446" y="52" font-family="Inter,sans-serif" font-size="11.5" fill="#DC4327">threshold</text>
+        <g fill="#DC4327"><circle cx="470" cy="96" r="5"/><circle cx="492" cy="128" r="5"/><circle cx="466" cy="156" r="5"/></g>
+        <g fill="none" stroke="#837E72" stroke-width="1"><circle cx="478" cy="248" r="4.5"/><circle cx="500" cy="286" r="4.5"/><circle cx="462" cy="312" r="4.5"/></g>
+        <text x="520" y="100" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="14" fill="#837E72">flagged</text>
+        <text x="520" y="290" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="14" fill="#837E72">not flagged</text>
+        <path d="M540,130 C580,130 580,176 606,180" stroke="#474E4C" stroke-width="1.2" fill="none" marker-end="url(#ar)"/>
+        <rect x="612" y="142" width="144" height="80" fill="#FCFAF4" stroke="#15191A" stroke-width="1.6"/>
+        <text x="684" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" fill="#15191A">Counsellor</text>
+        <text x="684" y="191" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#837E72">sees the reasoning</text>
+        <path d="M684,226 L684,268" stroke="#0E6B63" stroke-width="1.2"/><circle cx="684" cy="272" r="4" fill="#0E6B63"/>
+        <text x="684" y="300" text-anchor="middle" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#0E6B63">the decision happens here,</text>
+        <text x="684" y="320" text-anchor="middle" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#0E6B63">not upstream</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="panel p-lead" id="s1b">
+    <div class="figwrap">
+      <div class="figlead">
+        <h3>ATHENA</h3>
+        <p class="cred">AI Research Scientist · IIT Jammu capstone · built solo</p>
+        <p>Ask a general chatbot for a literature review and it will hand you fluent prose citing papers that do not exist. An assistant you have to fact-check line by line has cost you more time than it saved.</p>
+        <p>ATHENA's answer is structural. Eight agents run a fixed sequence, each forbidden the next one's job, and a deterministic guardrail rejects any citation whose paper was never retrieved. Fabrication is not discouraged here. It is unavailable.</p>
+        <button class="openlink" data-open="p:athena">Open the full project →</button>
+      </div>
+      <svg id="athenafig" viewBox="0 0 760 430" role="img"
+           aria-label="Eight agents in a fixed sequence from Principal Investigator to Scientific Writer, ending at a human approval gate, with a citation guardrail between the Citation Manager and the Writer.">
+        <defs><marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6" fill="none" stroke="#474E4C" stroke-width="1.2"/></marker></defs>
+        <g font-family="Inter,sans-serif" font-size="12.5" fill="#15191A">
+          <g>
+            <rect x="0" y="16" width="196" height="40" fill="#FCFAF4" stroke="#D8D1C0"/>
+            <text x="14" y="41">1 · Principal Investigator</text>
+            <rect x="0" y="66" width="196" height="40" fill="#FCFAF4" stroke="#0E6B63"/>
+            <text x="14" y="91">2 · Literature Review</text>
+            <rect x="0" y="116" width="196" height="40" fill="#FCFAF4" stroke="#D8D1C0"/>
+            <text x="14" y="141">3 · Knowledge Synthesist</text>
+            <rect x="0" y="166" width="196" height="40" fill="#FCFAF4" stroke="#D8D1C0"/>
+            <text x="14" y="191">4 · Gap Analyst</text>
+            <rect x="0" y="216" width="196" height="40" fill="#FCFAF4" stroke="#D8D1C0"/>
+            <text x="14" y="241">5 · Hypothesis Generator</text>
+            <rect x="0" y="266" width="196" height="40" fill="#FCFAF4" stroke="#D8D1C0"/>
+            <text x="14" y="291">6 · Experiment Planner</text>
+            <rect x="0" y="316" width="196" height="40" fill="#FCFAF4" stroke="#4335A0"/>
+            <text x="14" y="341">7 · Citation Manager</text>
+            <rect x="0" y="366" width="196" height="40" fill="#FCFAF4" stroke="#D8D1C0"/>
+            <text x="14" y="391">8 · Scientific Writer</text>
+          </g>
+        </g>
+        <path d="M196,86 L250,86" stroke="#0E6B63" stroke-width="1.2" fill="none" marker-end="url(#ar2)"/>
+        <rect x="256" y="62" width="150" height="48" fill="#FCFAF4" stroke="#0E6B63" stroke-width="1.5"/>
+        <text x="331" y="83" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" fill="#15191A">shared corpus</text>
+        <text x="331" y="99" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#837E72">3 databases</text>
+        <path d="M331,110 L331,330" stroke="#4335A0" stroke-width="1.2" stroke-dasharray="4 5" fill="none"/>
+        <path d="M196,336 L250,336" stroke="#4335A0" stroke-width="1.2" fill="none" marker-end="url(#ar2)"/>
+        <rect x="256" y="312" width="150" height="48" fill="#FCFAF4" stroke="#4335A0" stroke-width="1.5"/>
+        <text x="331" y="333" text-anchor="middle" font-family="Inter,sans-serif" font-size="12.5" fill="#15191A">guardrail</text>
+        <text x="331" y="349" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#837E72">set lookup, not judgement</text>
+        <text x="420" y="196" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#4335A0">a citation whose paper is not</text>
+        <text x="420" y="216" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#4335A0">in the corpus cannot be written</text>
+        <path d="M406,336 L470,336" stroke="#474E4C" stroke-width="1.2" fill="none" marker-end="url(#ar2)"/>
+        <rect x="476" y="306" width="180" height="60" fill="#FCFAF4" stroke="#15191A" stroke-width="1.6"/>
+        <text x="566" y="332" text-anchor="middle" font-family="Inter,sans-serif" font-size="13.5" fill="#15191A">Human approval</text>
+        <text x="566" y="351" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#837E72">nothing saves without it</text>
+        <path d="M566,372 L566,398" stroke="#0E6B63" stroke-width="1.2"/><circle cx="566" cy="402" r="4" fill="#0E6B63"/>
+        <text x="566" y="424" text-anchor="middle" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#0E6B63">the same gate, again</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="panel p-lead" id="s1c">
+    <div class="figwrap">
+      <div class="figlead">
+        <h3>AI Research Assistant</h3>
+        <p class="cred">IIT Jammu capstone · n8n · eight workflows, 114 nodes</p>
+        <p>Register a topic once. Every morning the system collects new papers from arXiv and Semantic Scholar, discards the ones that merely contain your keyword, summarises what survives, builds the references and emails a digest.</p>
+        <p>A relevance gate at 0.70 does the filtering, and a dedicated error handler and append-only log record every run and every failure. That is what makes the output trustworthy rather than merely automatic.</p>
+        <button class="openlink" data-open="p:n8n">Open the full project →</button>
+      </div>
+      <svg id="funnel" viewBox="0 0 900 430" role="img"
+           aria-label="Thirty-seven candidate papers pass a relevance gate at 0.70; thirty-six are kept and summarised, one is discarded as noise.">
+        <g id="cloud"></g>
+        <line x1="420" y1="24" x2="420" y2="372" stroke="#4335A0" stroke-width="1.4"/>
+        <text x="430" y="38" font-family="Inter,sans-serif" font-size="12" fill="#4335A0">relevance gate · 0.70</text>
+        <g id="kept"></g>
+        <circle cx="462" cy="398" r="5" fill="none" stroke="#837E72" stroke-width="1.2"/>
+        <text x="478" y="403" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="14" fill="#837E72">one discarded as noise</text>
+        <text x="16" y="20" font-family="Inter,sans-serif" font-size="12" fill="#837E72">arXiv and Semantic Scholar, every morning</text>
+        <text x="612" y="20" font-family="Inter,sans-serif" font-size="12" fill="#4335A0">36 summarised · 36 cited · 0 silent failures</text>
+        <path d="M700,52 L700,344" stroke="#D8D1C0" stroke-width="1"/>
+        <text x="716" y="196" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#837E72">then a digest,</text>
+        <text x="716" y="216" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#837E72">in your inbox</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="panel p-lead" id="s1d">
+    <div class="figwrap">
+      <div class="figlead">
+        <h3>CodeReview NLP</h3>
+        <p class="cred">Group project of four · 210 pull requests from Flask</p>
+        <p>A pull request is read by someone who has to decide, quickly, whether this code will still make sense in six months. This reads it first and reports on four things: the identifier names, the inline comments, the commit message, and the tone of the review comments.</p>
+        <p>I built the data pipeline and the naming module. The pipeline pulls closed pull requests from the Flask repository through the GitHub API and flattens each one into code, commit message and review comments. The naming module reads every function and variable name out of the diff, scores it, and says which ones it would ask you to rename.</p>
+        <button class="openlink" data-open="p:codereview">Open the full project &rarr;</button>
+      </div>
+      <svg id="prfig" viewBox="0 0 900 430" role="img"
+           aria-label="One pull request is read by four modules whose scores combine into one health score. Below, the distribution of naming scores across 210 Flask pull requests: 150 score between 90 and 99, 37 between 80 and 89, 12 between 70 and 79, 3 between 60 and 69, and 8 between 50 and 59.">
+        <rect x="14" y="68" width="98" height="54" fill="none" stroke="#474E4C" stroke-width="1.3"/>
+        <text x="63" y="92" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">one pull</text>
+        <text x="63" y="109" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">request</text>
+
+        <path d="M112,95 C154,95 154,34 196,34" fill="none" stroke="#0E6B63" stroke-width="1.7"/>
+        <path d="M112,95 C154,95 154,75 196,75" fill="none" stroke="#C6BFAC" stroke-width="1.2"/>
+        <path d="M112,95 C154,95 154,116 196,116" fill="none" stroke="#C6BFAC" stroke-width="1.2"/>
+        <path d="M112,95 C154,95 154,157 196,157" fill="none" stroke="#C6BFAC" stroke-width="1.2"/>
+
+        <line x1="196" y1="34" x2="452" y2="34" stroke="#0E6B63" stroke-width="1.7"/>
+        <line x1="196" y1="75" x2="452" y2="75" stroke="#C6BFAC" stroke-width="1.2"/>
+        <line x1="196" y1="116" x2="452" y2="116" stroke="#C6BFAC" stroke-width="1.2"/>
+        <line x1="196" y1="157" x2="452" y2="157" stroke="#C6BFAC" stroke-width="1.2"/>
+
+        <text x="202" y="26" font-family="Inter,sans-serif" font-size="12.5" fill="#0E6B63">identifier names</text>
+        <text x="202" y="67" font-family="Inter,sans-serif" font-size="12.5" fill="#837E72">inline comments</text>
+        <text x="202" y="108" font-family="Inter,sans-serif" font-size="12.5" fill="#837E72">commit message</text>
+        <text x="202" y="149" font-family="Inter,sans-serif" font-size="12.5" fill="#837E72">tone of the review</text>
+
+        <path d="M452,34 C500,34 500,95 544,95" fill="none" stroke="#0E6B63" stroke-width="1.5"/>
+        <path d="M452,75 C500,75 500,95 544,95" fill="none" stroke="#C6BFAC" stroke-width="1.2"/>
+        <path d="M452,116 C500,116 500,95 544,95" fill="none" stroke="#C6BFAC" stroke-width="1.2"/>
+        <path d="M452,157 C500,157 500,95 544,95" fill="none" stroke="#C6BFAC" stroke-width="1.2"/>
+
+        <rect x="544" y="68" width="166" height="54" fill="none" stroke="#474E4C" stroke-width="1.3"/>
+        <text x="627" y="92" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">one PR health</text>
+        <text x="627" y="109" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">score, with reasons</text>
+        <text x="726" y="99" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#837E72">four readings,</text>
+        <text x="726" y="119" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="15" fill="#837E72">one number</text>
+
+        <line x1="14" y1="200" x2="886" y2="200" stroke="#D8D1C0" stroke-width="1"/>
+        <text x="14" y="228" font-family="Spectral,Palatino,Georgia,serif" font-style="italic" font-size="16" fill="#0E6B63">my lane, run over all 210 pull requests</text>
+
+        <text x="138" y="264" text-anchor="end" font-family="Inter,sans-serif" font-size="12" fill="#837E72">90&#8211;99</text>
+        <rect x="150" y="251" width="480" height="17" fill="#0E6B63" opacity=".78"/>
+        <text x="642" y="264" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">150</text>
+
+        <text x="138" y="296" text-anchor="end" font-family="Inter,sans-serif" font-size="12" fill="#837E72">80&#8211;89</text>
+        <rect x="150" y="283" width="118" height="17" fill="#0E6B63" opacity=".60"/>
+        <text x="280" y="296" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">37</text>
+
+        <text x="138" y="328" text-anchor="end" font-family="Inter,sans-serif" font-size="12" fill="#837E72">70&#8211;79</text>
+        <rect x="150" y="315" width="38" height="17" fill="#0E6B63" opacity=".46"/>
+        <text x="200" y="328" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">12</text>
+
+        <text x="138" y="360" text-anchor="end" font-family="Inter,sans-serif" font-size="12" fill="#837E72">60&#8211;69</text>
+        <rect x="150" y="347" width="10" height="17" fill="#0E6B63" opacity=".40"/>
+        <text x="172" y="360" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">3</text>
+
+        <text x="138" y="392" text-anchor="end" font-family="Inter,sans-serif" font-size="12" fill="#837E72">50&#8211;59</text>
+        <rect x="150" y="379" width="26" height="17" fill="#0E6B63" opacity=".40"/>
+        <text x="188" y="392" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">8</text>
+
+        <text x="14" y="418" font-family="Inter,sans-serif" font-size="12" fill="#837E72">naming score, 0 to 100</text>
+        <text x="420" y="418" font-family="Inter,sans-serif" font-size="12" fill="#474E4C">98 of the 210 carry at least one name it would ask you to change</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="panel p-mark">
+    <p class="n">ii</p><div class="hue" style="background:var(--indigo)"></div>
+    <h2>Research I am <em>working on</em></h2>
+    <p>Four open threads, and the question each one is asking.</p>
+  </section>
+
+  <section class="panel p-matrix" id="s2">
+    <div class="rstack">
+      <div class="rband">
+        <div>
+          <p class="rnum">1</p>
+          <h3>A Protocol-Faithful Cross-Audit of Scientific Literature Search</h3>
+          <p class="cred">Anshika Rana and Rishabh Kaushal · IGDTUW · first author · paper in drafting, results complete</p>
+          <p>Four literature-search benchmarks each report a winner on their own data. This audit asks whether the winner survives being moved: every protocol run on every dataset, sixteen cells, 114 open-model runs.</p>
+          <p>It mostly does not. The protocol, not the query, drives recall.</p>
+          <button class="openlink" data-open="r:pfca">Open the paper and the live dashboard &rarr;</button>
+        </div>
+        <div>
+          <div class="mxwrap"><table class="mx" id="mx"><caption>Best Recall@10 per cell. Rows are evaluation protocols, columns are datasets. Outlined cells are each benchmark's own data.</caption></table></div>
+          <p class="scalekey"><i></i> 5 &rarr; 98 percent recall · <span style="color:var(--ochre)">outline = native pairing</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel p-matrix p-matrix2" id="s2b">
+    <div class="rstack">
+      <div class="rsub" id="resrows"></div>
+    </div>
+  </section>
+
+  <section class="panel p-mark">
+    <p class="n">iii</p><div class="hue" style="background:var(--teal)"></div>
+    <h2>Three <em>summers</em></h2>
+    <p>Where the toolkit came from, and then what it was pointed at.</p>
+  </section>
+
+  <section class="panel p-matrix p-matrix2" id="sI">
+    <div class="rstack">
+      <div class="rsub" id="internrows"></div>
+    </div>
+  </section>
+
+  <section class="panel p-mark">
+    <p class="n">iv</p><div class="hue" style="background:var(--ochre)"></div>
+    <h2>Taught, then <em>built on</em></h2>
+    <p>Eight semesters, left to right. Click any course for its syllabus and the lab work I did inside it.</p>
+  </section>
+
+  <section class="panel p-degree" id="s3">
+    <div class="scroller" style="display:flex;align-items:stretch">
+      <div class="stations" id="stations"></div>
+      <aside class="legend">
+        <h4>How to read these grades</h4>
+        <p class="lead">IGDTUW marks on a ten-point scale. Each course carries credits; a semester average weights every grade by its course's credits.</p>
+        <table>
+          <tr><td>Outstanding</td><td>A+</td><td>10</td></tr>
+          <tr><td>Excellent</td><td>A</td><td>9</td></tr>
+          <tr><td>Very good</td><td>B+</td><td>8</td></tr>
+          <tr><td>Good</td><td>B</td><td>7</td></tr>
+          <tr><td>Average</td><td>C+</td><td>6</td></tr>
+          <tr><td>Below average</td><td>C</td><td>5</td></tr>
+          <tr><td>Marginal</td><td>D</td><td>4</td></tr>
+          <tr><td>Poor</td><td>F</td><td>0</td></tr>
+        </table>
+        <p class="formula"><b>SGPA</b> = Σ(credits × grade points) ÷ Σ(credits), across one semester. <b>CGPA</b> is the same sum carried across every semester so far, counting only courses graded D or above.</p>
+      </aside>
+    </div>
+    <div class="dfoot">
+      <span>Cumulative through semester six <b>7.07</b></span>
+      <span>Credits carried <b>134</b></span>
+      <span>Graduating <b>June 2027</b></span>
+    </div>
+  </section>
+
+  <section class="panel p-close" id="s4">
+    <h2>Let's <em>talk</em></h2>
+    <p>I'm a prospective Master's student interested in the fields of cognitive sciences and artificial intelligence, currently pursuing a Bachelor of Technology in Computer Science Engineering and Artificial Intelligence.</p>
+    <a class="pdf" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <a href="mailto:anshikaranaa.114@gmail.com">anshikaranaa.114@gmail.com</a>
+    <a href="https://github.com/AnshikaRana" target="_blank" rel="noopener">github.com/AnshikaRana</a>
+    <a href="https://www.linkedin.com/in/anshika-rana-02a4b6289/" target="_blank" rel="noopener">LinkedIn</a>
+  </section>
+
+</div></div>
+
+<nav class="prog" id="prog">
+  <button class="on" data-go="0">Opening</button><button data-go="1">Projects</button>
+  <button data-go="2">Research</button><button data-go="3">Internships</button>
+  <button data-go="4">Degree</button><button data-go="5">Contact</button>
+  <span class="bar"><span class="thumb" id="thumb"></span></span>
+  <span class="keys" style="color:var(--ink-3)">scroll · ← →</span>
+  <button class="layout-toggle" id="layoutBtn"></button>
+</nav>
+
+<div class="scrim" id="scrim"><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
