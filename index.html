@@ -44,17 +44,16 @@
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);
     mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
   .plate img{display:block;width:100%;height:auto}
-  /* the portrait sits in the gap beside the name and the programme block,
-     clear of the signal line that runs along the foot of the panel */
-  .portrait{position:absolute;right:24%;top:7%;
-    height:min(70%,640px);width:auto;max-width:30vw;opacity:.88;margin:0;pointer-events:none;
-    -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 66%,transparent 100%);
-    mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 66%,transparent 100%)}
-  /* the figure keeps its edges; the wall behind it dissolves into the paper */
-  .portrait img{display:block;height:100%;width:auto;
-    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 15%,#000 85%,transparent 100%);
-    mask-image:linear-gradient(90deg,transparent 0,#000 15%,#000 85%,transparent 100%)}
-  html.stacked .portrait{display:none}
+  /* introduction: the story takes the width, the portrait and interests sit in a side column */
+  .openwrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(44px,5.5vw,104px);
+    align-items:center;width:100%;max-width:1640px;margin:0 auto}
+  .side{width:clamp(226px,19vw,300px)}
+  .portrait{margin:0;display:inline-block;padding:5px;background:var(--card);border:1px solid #C9C1AD;
+    box-shadow:0 22px 44px -34px rgba(21,25,26,.45);line-height:0}
+  .portrait img{display:block;height:clamp(200px,37vh,400px);width:auto;max-width:100%;opacity:.8}
+  html.stacked .openwrap{grid-template-columns:1fr;gap:34px}
+  html.stacked .side{width:auto}
+  html.stacked .portrait img{height:300px}
   .panel{--padx:clamp(56px,5.6vw,116px);position:relative;z-index:1;flex:0 0 auto;height:100%;
     padding:84px var(--padx) 150px;display:flex;flex-direction:column;justify-content:center}
 
@@ -82,10 +81,20 @@
   h1{font-family:var(--display);font-weight:400;font-size:clamp(62px,12vh,104px);line-height:.86;
     letter-spacing:-.025em;margin:0 0 4px}
   h1 em{font-style:italic;display:block;margin-left:.88em}
+  /* the introduction sets the name on one line to leave room for the story */
+  .p-open h1{font-size:clamp(54px,10vh,96px);line-height:1.02;margin:0}
+  .p-open h1 em{display:inline;margin-left:.06em}
+  .p-open .meta{border-top:0;padding-top:0;margin:clamp(8px,1.6vh,16px) 0 0;max-width:none}
+  .story{margin:clamp(16px,3.2vh,34px) 0 0;padding-top:clamp(14px,2.8vh,28px);border-top:1px solid var(--line)}
+  .story p{font-family:var(--display);font-size:clamp(16px,2.4vh,20.5px);line-height:1.52;
+    color:var(--ink-2);margin:0 0 clamp(8px,1.6vh,14px)}
+  .p-open .links{margin-top:clamp(16px,3vh,30px)}
+  .story b{font-weight:400;color:var(--ink);background:linear-gradient(transparent 62%,rgba(var(--ochre-rgb),.3) 62%)}
+    html.stacked .story p{font-size:17px}
   .claim{font-family:var(--display);font-size:clamp(18px,2.9vh,25px);line-height:1.42;max-width:29ch;
     margin:clamp(18px,4vh,36px) 0 0;color:var(--ink-2)}
   .claim b{font-weight:400;color:var(--ink);background:linear-gradient(transparent 62%,rgba(var(--ochre-rgb),.3) 62%)}
-  .meta{display:flex;gap:46px;max-width:min(600px,44vw);margin:clamp(20px,4.4vh,40px) 0 clamp(18px,3.7vh,34px);
+  .meta{display:flex;gap:46px;max-width:min(660px,44vw);margin:clamp(14px,3vh,32px) 0 clamp(16px,3vh,30px);
     padding-top:clamp(12px,2.4vh,22px);border-top:1px solid var(--line)}
   .meta div span{display:block;font-size:12.5px;color:var(--ink-3);margin-bottom:3px}
   .meta div b{font-family:var(--display);font-weight:400;font-size:17px;color:var(--ink)}
@@ -97,15 +106,13 @@
   .btn:hover{background:var(--teal);border-color:var(--teal);color:#fff;transform:translateY(-1px)}
   a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
 
-  /* research interests: the column to the right of the portrait */
-  .interests{position:absolute;right:var(--padx);top:50%;transform:translateY(-62%);
-    width:clamp(214px,17.5vw,290px);margin:0}
-  .interests span{display:block;font-size:12.5px;color:var(--indigo);margin-bottom:10px}
+  /* research interests, under the portrait */
+  .interests{margin:clamp(12px,2.4vh,24px) 0 0}
+  .interests span{display:block;font-size:12.5px;color:var(--indigo);margin-bottom:clamp(6px,1.1vh,10px)}
   .interests ul{margin:0;padding:0;list-style:none}
-  .interests li{font-family:var(--display);font-size:clamp(17px,2.75vh,22px);line-height:1.22;
-    color:var(--ink);padding:clamp(9px,1.7vh,14px) 0;border-top:1px solid var(--line)}
+  .interests li{font-family:var(--display);font-size:clamp(15.5px,2.4vh,20px);line-height:1.2;
+    color:var(--ink);padding:clamp(6px,1.25vh,12px) 0;border-top:1px solid var(--line)}
   .interests li:last-child{border-bottom:1px solid var(--line)}
-  html.stacked .interests{position:static;transform:none;width:auto;margin:30px 0 0}
   .hint{position:absolute;left:70px;bottom:30px;font-size:13px;color:var(--ink-3);
     display:flex;align-items:center;gap:11px}
   .hint i{display:block;width:54px;height:1px;background:var(--teal);position:relative;font-style:normal}
@@ -325,6 +332,7 @@
     line-height:1.55;color:var(--ink-2);max-width:70ch;border-top:1px solid var(--line)}
   .u i,.l i{font-style:italic;font-family:var(--display);font-size:14px;color:var(--ink-3);padding-top:2px}
   .l i{color:var(--ochre)}
+  .pjt{font-family:var(--display);font-weight:400;font-size:25px;line-height:1.15;margin:0 0 12px}
   .plainnote{font-size:14.5px;line-height:1.62;color:var(--ink-2);margin:18px 0 0;
     padding:13px 16px;background:rgba(14,107,99,.05);border-left:2px solid var(--teal)}
   ul.team{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 26px}
@@ -405,26 +413,35 @@
   </div>
 
   <section class="panel p-open" id="s0">
-    <figure class="portrait"><img src="assets/portrait.webp" alt=""></figure>
-    <h1>Anshika<em>Rana</em></h1>
-    <p class="claim">I build machines that read: literature in one project, students in another. I keep a person in the loop wherever the reading is <b>about someone's life</b>.</p>
-    <div class="meta">
-      <div><span>Programme</span><b>B.Tech CSE (AI), IGDTUW</b></div>
-      <div><span>Final year</span><b>Graduating June 2027</b></div>
-    </div>
-    <div class="links">
-      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Open resume</a>
-      <a class="btn ghost" href="https://github.com/AnshikaRana" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/anshika-rana-02a4b6289/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-    <div class="interests">
-      <span>Research interests</span>
-      <ul>
-        <li>Human-centred AI and HCI</li>
-        <li>Reliable language models</li>
-        <li>Affective computing</li>
-        <li>Cognitive science</li>
-      </ul>
+    <div class="openwrap">
+      <div class="opentext">
+        <h1>Anshika <em>Rana</em></h1>
+        <div class="meta">
+          <div><span>Programme</span><b>B.Tech CSE (AI), IGDTUW</b></div>
+          <div><span>Final year</span><b>Graduating June 2027</b></div>
+        </div>
+        <div class="story">
+          <p>Over my bachelor's I have tried computer science on as many kinds of problem as I could reach, through projects and courses in cybersecurity, economic policy, education, healthcare, agriculture, information retrieval and even airplane performance. Working across them showed me where I kept returning: <b>cognitive science</b>, and what it can offer in social robotics and trustworthy artificial intelligence, which are my prime interests.</p>
+          <p>I want to build technology that gives people their time back, by taking over the long chains of routine steps that once consumed hours and left little room for creativity. My final semester is chosen around that aim, with Cognitive Computing, Introduction to Cognitive Psychology and an R&amp;D project in the same field, to be followed by a Master's in a closely related area.</p>
+        </div>
+        <div class="links">
+          <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Open resume</a>
+          <a class="btn ghost" href="https://github.com/AnshikaRana" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/anshika-rana-02a4b6289/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <aside class="side">
+        <figure class="portrait"><img src="assets/portrait.webp" alt="Anshika Rana"></figure>
+        <div class="interests">
+          <span>Research interests</span>
+          <ul>
+            <li>Human-centred AI and HCI</li>
+            <li>Reliable language models</li>
+            <li>Affective computing</li>
+            <li>Cognitive science</li>
+          </ul>
+        </div>
+      </aside>
     </div>
   </section>
 

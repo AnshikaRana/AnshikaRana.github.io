@@ -181,7 +181,13 @@ const INTERNSHIPS = {
       "The work was built on OpenCV: real-time object detection, face anonymisation, and image segmentation.",
       "Face anonymisation is the piece worth keeping. Detecting a face and then deliberately destroying the information that identifies it is the same decision as the rest of my work, taken in the other direction: a system that can recognise someone is a system that can be told not to."
     ],
-    figs:[["6 wks","2 June to 11 July 2025"],["3","areas of work"],["OpenCV","the whole toolkit"]],
+    figs:[["6 wks","2 June to 11 July 2025"],["3","areas of work"],["OpenCV","and Keras for the project"]],
+    project:{title:"Wardrobe Assistant", body:[
+      "A notebook that looks at photographs of your clothes, works out what each item is, and suggests what the wardrobe is missing.",
+      "The classifier is a three-block convolutional network trained from scratch on the Re-PolyVore dataset: 4,950 images across 11 categories, from pants and tops to eyewear and bags, resized to 128 pixels and augmented with rotation, shifts, zoom and flips. After 30 epochs it reaches 74.6 percent accuracy on a held-out test set of 743 images.",
+      "Around it sit three simpler steps: a dominant-colour reading for each photograph, a rule table for style and pairing, and a list of suggested additions for the categories the wardrobe lacks.",
+      "What I learned: the classifier was the dependable part. The colour step averages every pixel, background included, so my own photographs all came out grey, and the pairing rules were written for labels the dataset does not use. Both taught me to test a pipeline on real inputs and not to stop at its accuracy figure."
+    ]},
     certs:[["assets/intern-2025.webp","Certificate of completion, Computer Vision and Deep Learning, six week summer internship, Anveshan Foundation, IGDTUW"]],
     links:[]
   },
@@ -195,6 +201,12 @@ const INTERNSHIPS = {
       "Everything in the Projects chapter rests on this one, which is the honest reason it is here."
     ],
     figs:[["8 wks","3 June to 29 July 2024"],["1st","of three summers"],["Python","and the classical stack"]],
+    project:{title:"Privacy-Enhanced Movie Recommendation System", body:[
+      "A content-based recommender over 4,803 films. You type a title, and it returns the films most like it.",
+      "Each film is described by its genres, keywords, tagline, cast and director. Those are turned into TF-IDF vectors and every film is compared with every other by cosine similarity. A misspelled title is matched to the closest real one before the search runs.",
+      "The privacy part is a first step. I set up a differentially private optimiser from TensorFlow Privacy, with gradient clipping and Gaussian noise, as the route to a recommender that learns from people's histories without memorising any one of them. This version does not yet train with it.",
+      "What I learned: how text features become vectors, how similarity search behaves across a few thousand items, and what differential privacy asks of a training loop before accuracy is even discussed."
+    ]},
     certs:[["assets/intern-2024.webp","Certificate of completion, Python and Machine Learning, eight week summer internship, Centre of Excellence in Artificial Intelligence, IGDTUW"]],
     links:[]
   }
@@ -378,7 +390,7 @@ const COURSES = {
     ["Unit III","Deep Neural Network: Deep Learning, Deep Neural Networks: Difficulty of training deep neural networks, Activation Function, Hyper parameters vs Parameters, Greedy layer wise training, Recurrent Neural Networks: Backpropagation through time, Long Short Term Memory, Gated Recurrent Units, Bidirectional LSTMs, Bidirectional RNNs, Applications in Natural Language Processing."],
     ["Unit IV","Applications: Convolutional Neural Networks. Filters, Pooling. Image Classification. Well known case studies: LeNet, AlexNet, VGG-16, ResNet, InceptionNet. Transfer Learning. Weight Initialization, Batch Normalization, Regularization. Applications in Vision, Speech, and Audio-Video."]],
     [], ""),
-  "HMC 301": C("HMC-301","Professional Ethics",3,"B+",[
+  "HMC 301": C("HMC-301","Professional Ethics and Human Values",3,"B+",[
     ["Unit I","Human Values Morals, Values and Ethics, Integrity, Work Ethic, Respect for Others, Living Peacefully, Caring, Sharing, Honesty, Valuing Time, Co-operation, Commitment, Empathy, Self-Confidence, Character, Spirituality. Indian values (on the conceptual framework of Vedas): Purusharth, Niskama karma, Religion and Human Values, Towards a World Religion, Ethical Living and Harmony in Life."],
     ["Unit II","Profession and Professionalism, Ethical Theories: Kohlberg’s Theory, Gilligan’s Theory, Feminist Consequentialism, Moral Dilemmas, Types of Enquiries, Uses of Ethical Theories, Engineering Profession, Engineering Professionals- Training, Skill Set, Life Skills, Engineering Ethics: Making Senses and Issues, Ethical Obligations of Engineers, Ethical Codes for Engineers."],
     ["Unit III","Engineering as a Social Experimentation, Safety Responsibility and Rights: Engineering as experimentation, Engineers as responsible Experimenters, Concept of Safety and Risk, Engineer’s Responsibility for Safety, Risk – Benefit Analysis, Case Studies: The challenger case study, The Three Mile Island, Fukushima Nuclear Disaster, Bhopal Gas Tragedy. Disaster Management, Professional Rights, Employee Rights, Intellectual Property Rights (IPRs), Human Rights and Human Responsibilities. Major Ethical Issues."],

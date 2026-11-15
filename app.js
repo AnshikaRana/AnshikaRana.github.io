@@ -4,7 +4,7 @@ const SEMS=[
  ["Semester 2","6.45","Completed",[["IT Workshop","A","BAI 108",1],["Database Management","B","BAI 106",0],["Environmental Science","B","BAS 106",0],["Intro to Data Science","","BAI 104",0],["OOP using Java","","BAI 102",0],["Probability & Statistics","","BAS 108",0]]],
  ["Semester 3","6.35","Completed",[["Artificial Intelligence","B+","BAI 201",1],["Internship","B+","BAI 253",0],["Discrete Structures","B","BCS 203",0],["Data Structures","","BCS 201",0],["Software Engineering","","BIT 203",0],["Numerical Methods","","BAS 203",0],["Introduction to Airplane Performance (NPTEL)","","GEC 201",0]]],
  ["Semester 4","7.27","Completed",[["Optimization Techniques","A","BAI 204",1],["Operating Systems","B+","BIT 202",0],["Disaster Management","B+","HMC 202",0],["Computer Networks","B","BAI 202",0],["Algorithms","","BCS 204",0],["Operations Management","","BMA 210",0]]],
- ["Semester 5","8.27","Completed",[["Machine Learning","A","BAI 301",1],["Theory of Computation","A","BCS 303",0],["Startup Development","A","GEC 301",0],["Cyber Security","B+","BAI 303",0],["Deep Learning I","B","BAI 305",0],["Professional Ethics","B+","HMC 301",0],["Internship","B+","BAI 353",0]]],
+ ["Semester 5","8.27","Completed",[["Machine Learning","A","BAI 301",1],["Theory of Computation","A","BCS 303",0],["Startup Development","A","GEC 301",0],["Cyber Security","B+","BAI 303",0],["Deep Learning I","B","BAI 305",0],["Professional Ethics and Human Values","B+","HMC 301",0],["Internship","B+","BAI 353",0]]],
  ["Semester 6","7.91","Completed",[["Cloud Computing","A","BAI 308",1],["Marketing Management","A","HMC 304",0],["Natural Language Processing","B+","BAI 302",0],["Deep Learning II","B+","BAI 304",0],["Digital Image Processing","B","BAI 306",0],["Data Warehousing and Business Intelligence","B","BAI 322",0]]],
  ["Semester 7","·","In progress",[["Computer Vision","","BAI 403",1],["Conversational AI","","BAI 409",1],["Multimodal Data Analytics","","BAI 417",0],["Recent Trends in AI","","BAI 415",0],["Big Data Analytics","","BIT 407",0],["Minor Project","","BAI 451",0],["Internship","","BAI 453",0]]],
  ["Semester 8","·","Ahead",[["Cognitive Computing","","BAI 414",1],["Introduction to Cognitive Psychology by IIT Guwahati (NPTEL)","","GEC 402",1],["Social Media Analytics","","BAI 404",0],["R&D Project","","BAI 452",0],["Creativity, Innovation and Entrepreneurship","","HMC 402",0]]]
@@ -114,6 +114,10 @@ function openItem(kind,key){
     ? '<h5>From the demo</h5><div class="certs">'+
       o.shots.map(([src,cap])=>`<figure class="certfig"><img src="${src}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`).join('')+
       '</div>' : '';
+  // the project built during an internship
+  const proj = o.project
+    ? `<h5>Project from this internship</h5><h4 class="pjt">${esc(o.project.title)}</h4>`+
+      o.project.body.map(p=>`<p class="para">${esc(p)}</p>`).join('') : '';
   const cert = o.certs&&o.certs.length
     ? '<h5>'+(o.certs.length>1?'Certificate and award':'Certificate')+'</h5><div class="certs">'+
       o.certs.map(([src,cap])=>`<figure class="certfig"><img src="${src}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`).join('')+
@@ -122,7 +126,7 @@ function openItem(kind,key){
     `<p class="tag">${esc(o.kind)}</p><h3>${esc(o.title)}</h3><p class="sub">${esc(o.meta)}</p>`+
     `<p class="brief">${esc(o.lead)}</p>`+
     (o.body||[]).map(p=>`<p class="para">${esc(p)}</p>`).join('')+
-    stats(o.figs)+team+mine+shots+deck+cert+linkrow(o.links)+note(o.check));
+    stats(o.figs)+proj+team+mine+shots+deck+cert+linkrow(o.links)+note(o.check));
 }
 function openCourse(code,name,grade){
   const c=COURSES[code];
@@ -286,10 +290,10 @@ function revealTrace(){
 // above it, widening first so it still fills the column after scaling.
 const SIG_RISE=70;    // how far the research noise reaches above the base, plus clearance
 function fitResearch(){
-  ['s1','s1b','s1c','s1d','s2','s2b','sI'].forEach(id=>{
+  ['s0','s1','s1b','s1c','s1d','s2','s2b','sI'].forEach(id=>{
     const host=document.getElementById(id);
     if(!host)return;
-    const stack=host.querySelector('.rstack,.figwrap');
+    const stack=host.querySelector('.rstack,.figwrap,.openwrap');
     if(!stack)return;
     const reset=()=>{stack.style.width=''; stack.style.transform='none'; stack.style.marginBottom='';};
     reset();
