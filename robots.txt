@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://anshikarana.github.io/sitemap.xml
+Sitemap: https://anshikarana.github.io/PORTFOLIO/sitemap.xml

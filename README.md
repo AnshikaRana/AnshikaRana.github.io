@@ -1,10 +1,10 @@
-# anshikarana.github.io
+# PORTFOLIO
 
 My portfolio. One page that reads sideways: projects, research, internships
 and the degree, with a single line running underneath that changes shape as
 the chapters change.
 
-Live at <https://anshikarana.github.io/>
+Live at <https://anshikarana.github.io/PORTFOLIO/>
 
 ## What is in here
 
