@@ -90,7 +90,6 @@ const PROJECTS = {
       "The module returns three things rather than one. A score normalised to 0 to 100, the list of identifiers it objected to, and a plain sentence for each one saying what to do about it. The scores and the flags are kept separate on purpose, because a score on its own tells the author nothing they can act on.",
       "Run over the whole dataset it reads 11,951 identifiers. 98 of the 210 pull requests carry at least one name it would ask you to change, and the most frequently flagged are the short Flask idioms: rv, bp, ctx, db."
     ],
-    check:"Two things. The Streamlit app sleeps when it is not used, so confirm it wakes up before this link goes public. And the README gives your three teammates by first name only, so send me their surnames if you want them credited in full.",
     links:[["Repository","https://github.com/AnshikaRana/codereview-nlp"],
            ["Live app","https://codereview-nlp-igdtuw.streamlit.app/"]]
   },
@@ -100,7 +99,7 @@ const PROJECTS = {
 const RESEARCH = {
   pfca: {
     title:"A Protocol-Faithful Cross-Audit of Scientific Literature Search",
-    kind:"First author", meta:"Anshika Rana and Rishabh Kaushal · IGDTUW · paper in drafting, targeting a journal · results complete",
+    kind:"First author", meta:"Anshika Rana and Rishabh Kaushal · IGDTUW · paper in drafting stage, targeting a journal · results complete",
     lead:"Four literature-search benchmarks each report their own winner on their own data. This audit asks a simple question nobody had tested: does the winner survive when you move it?",
     body:[
       "The evaluation protocols of LitSearch, DORIS-MAE, IRPAPERS and MAPLE were each run on all four datasets, giving sixteen cells. In every cell the dataset is rebuilt in the exact query, document and answer format that protocol expects, every open model the paper lists is run, and Recall@10 is reported alongside the paper's own native metrics.",
@@ -127,10 +126,9 @@ const RESEARCH = {
       "Full working title: Enhanced Early Crop Type Classification via Dual-Branch Cross-Attention and Rotation-Aware Adaptive Gating. The baseline is Gené-Mola et al., Computers and Electronics in Agriculture, 2026, reproduced faithfully rather than quoted.",
       "Data is CatCrops over Lleida in Catalonia: trained on 2022, tested on the following year, 18 crop classes, 264,535 field-seasons in all. Each field is 12 channels per satellite pass, ten bands plus cloud probability and the day of the year, up to 144 passes.",
       "The baseline folds the static facts about a field into the time series as extra time steps. The proposal splits them out: a transformer over the satellite series in one branch, elevation, slope, irrigation system and municipality in another, joined by cross-attention and FiLM. A rotation-aware gate then decides how much to trust last year\u0027s crop, lowering its weight when this season\u0027s signal has already diverged from it.",
-      "Four runs, each adding one component to the one before, three seeds each, evaluated at 1 March, 1 June, 1 September and 1 December. The honest result so far: the additions help only at the earliest date. On 1 March the full model reaches 0.467 macro-F1 against the baseline\u0027s 0.462, and 0.791 accuracy against 0.786 with a quarter of the variance. By September the baseline is ahead again and stays ahead.",
-      "That is the date the project is about, so the finding is not nothing. It is also not the finding the architecture was designed to produce, and the manuscript says so."
+      "Four runs, each adding one component to the one before, three seeds each, evaluated at four points in the season: 1 March, 1 June, 1 September and 1 December. The manuscript is in preparation."
     ],
-    figs:[["264,535","field-seasons"],["18","crop classes"],["4×3","runs by seeds"],["1 Mar","the date it helps"]],
+    figs:[["264,535","field-seasons"],["18","crop classes"],["4×3","runs by seeds"],["4","dates in the season"]],
     team:["Anshika Rana · model: baseline reproduction, both branches, fusion",
           "Ishu · data: CatCrops acquisition, preparation, day-of-year cropping",
           "Deepasha · rotation gate, class-balanced focal loss, trainer foundation",
@@ -141,7 +139,6 @@ const RESEARCH = {
       "The two branches. The temporal branch is that same encoder fed only the time series. The static branch embeds irrigation system and municipality, projects elevation and slope, and returns both a 64 dimensional summary and one token per static fact.",
       "The fusion, which is where the design decision sits. Cross-attention lets each time step of the satellite series query the static facts, so the series can pick up the field context that matters at that point in the season. It needs four separate static tokens to work: with a single static vector as the key, the attention weights are always one and the layer quietly degenerates into adding a constant. FiLM then uses the static summary to scale and shift the pooled temporal features, with gamma starting at one and beta at zero so training begins from the plain temporal features and has to earn the rest."
     ],
-    check:"Results are from the v2 protocol, three seeds, and the paper is still being written. Confirm you want the numbers on the page before it goes public, and tell me if the team would rather wait for the manuscript.",
     links:[["Repository","https://github.com/HumairaNaaz/Early-crop_classification"]]
   },
   yel: {
@@ -150,8 +147,8 @@ const RESEARCH = {
     lead:"How did differences in fiscal policy and crisis management affect unemployment recovery across the Eurozone?",
     body:["Compares France, Greece, Ireland, Italy, Portugal and Spain on unemployment, youth unemployment, government spending and GDP, drawn from the European Commission's Eurostat Data Browser, against the literature on austerity."],
     figs:[["6","countries compared"],["4","Eurostat series"]],
-    links:[["Repository","https://github.com/AnshikaRana/YEL-Project"]],
-    check:"Paper and presentation are in the repo. Confirm whether you want the full PDF linked publicly."
+    links:[["Read the paper (PDF)","https://github.com/AnshikaRana/YEL-Project/blob/main/YEL%20Capstone%20Research%20Paper_Anshika%20Rana.pdf"],
+           ["Repository","https://github.com/AnshikaRana/YEL-Project"]]
   }
 };
 
@@ -313,8 +310,8 @@ const COURSES = {
     ["Unit III","Interpolation and Approximations: Finite differences, Newton's forward and backward interpolation, Lagrange and Newton's divided difference interpolation formulas with error analysis, least square approximations. Numerical Integration: Newton-Cotes quadrature formulae (Trapezoidal and Simpson's rules) and their error analysis, Gauss--Legendre quadrature formulae."],
     ["Unit IV","Differential Equations: Solution of initial value problems using Picard, Taylor series, Euler'sand Runge- Kutta methods (up to fourth-order), system of first-order differential equations."]],
     [], ""),
-  "GEC 201": C("GEC-201","Open Elective",2,"",[],
-    [], "A Generic Open Elective is taken from a discipline outside the programme, chosen from a university-wide pool. The curriculum describes the category rather than fixed units, since the content comes from the department that offers it. Send me the handout for this one and I will add the units."),
+  "GEC 201": C("GEC-201","Introduction to Airplane Performance (NPTEL)",2,"",[],
+    [], "~Generic Open Elective, taken as an online course through NPTEL."),
 
   // Semester 4
   "BAI 204": C("BAI-204","Optimization Techniques",4,"A",[
@@ -352,7 +349,7 @@ const COURSES = {
     ["Unit II","Demand Forecasting-Need for demand forecasting, Techniques of forecasting, Time series analysis, Least Square Method, Moving Average, Exponential Method and Qualitative Techniques. Method Study- Introduction, Objectives Steps, Micromotion Study, Cycle graph and chronocycle graph, Therbligs and SIMO charts. Work Study – Objectives, Different Techniques, Standard Time, Allowances, Time study Numerical, Performance Rating, Work sampling. Process and Product Life Cycle, Material Requirement Planning – Introduction, MRP objectives, Functions served by MRPProduction Planning and Control, Supply chain and Logistics Management, Production Scheduling."],
     ["Unit III","Inventory Management - Introduction, Reasons for Holding Inventories, Relevant Costs o Inventories, EOQ models, Quantity Discount Models, Safety Stock, Inventory control system Selective Control of Inventory ABC analysis, VED analysis. Production Cost Concepts – Introduction, Cost of Production, Classification and analysis of Cost, break even analysis, Make and Buy."],
     ["Unit IV","Industrial Maintenance – Concepts of Maintenance, Organisation for Maintenance department, Types of Maintenance-Preventive, Breakdown and Corrective Maintenance Failure Analysis, Maintenance Performance, Replacement policies of machines."]],
-    [], "The scheme table lists this as BMA-210 and the syllabus page heads it BMA-211. Same course, Operations Management. Tell me which code your transcript uses."),
+    [], ""),
 
   // Semester 5
   "BAI 301": C("BAI-301","Machine Learning",4,"A",[
@@ -360,7 +357,7 @@ const COURSES = {
     ["Unit II","Supervised Learning Regression: Least Mean Square Regression; Ridge Regression and LASSO regression; Logistic Regression, Support Vector Machines, Kernels for learning non-linear functions, K-nearest-neighbor, Bayesian and Naïve Bayes Classifier, Decision Tree Learning."],
     ["Unit III","Unsupervised Learning Learning from unclassified data. Clustering. Hierarchical Agglomerative Clustering, k-means partitional clustering, Hierarchical, and Density-based Clustering, Expectation maximization (EM) for soft clustering. Dimensionality Reduction: Linear Discriminant Analysis; Principal Component Analysis;"],
     ["Unit IV","Advanced Topics Measuring the accuracy of learned hypotheses. Comparing learning algorithms: cross-validation, learning curves, and statistical hypothesis testing, Ensemble Learning: Bagging, boosting, and stacking, Random Forests, Ensemble Classification including Adaboost, Active learning with ensembles."]],
-    [], "Lab notebooks exist (MLlabexp3, Practical 1 and 2). Summaries not written yet."),
+    [], ""),
   "BCS 303": C("BCS-303","Theory of Computation",4,"A",[
     ["Unit I","Introduction to Theory of Computation: Definitions: Languages, Grammar, Automata, Applications of Theory of Computation, Finite Automata: DFA, NDFA , Equivalence of DFA and NDFA, DFA Minimization Regular Languages, Regular Grammars, Properties of Regular Languages, Pumping Lemma"],
     ["Unit II","Context Free Language: Introduction, Parsing and Ambiguity , Pushdown Automata (PDA), Non Deterministic PDA ,Context Free Grammar , Chomsky Normal Form , Greibach Normal Form , Parse Tree representation of Derivation Tree , Equivalence of PDA and CFGs , Properties of Context Free Grammars"],
@@ -380,7 +377,7 @@ const COURSES = {
     ["Unit II","Foundations of Deep Learning: Artificial Neural Networks: Single Layer Neural Network, Multilayer Perceptron, Gradient Descent, Back Propagation Learning, Architectural Design Issues. Learning Curves. Overfitting vs Under fitting, Regularization: L1, L2, Dropout, Data Augmentation."],
     ["Unit III","Deep Neural Network: Deep Learning, Deep Neural Networks: Difficulty of training deep neural networks, Activation Function, Hyper parameters vs Parameters, Greedy layer wise training, Recurrent Neural Networks: Backpropagation through time, Long Short Term Memory, Gated Recurrent Units, Bidirectional LSTMs, Bidirectional RNNs, Applications in Natural Language Processing."],
     ["Unit IV","Applications: Convolutional Neural Networks. Filters, Pooling. Image Classification. Well known case studies: LeNet, AlexNet, VGG-16, ResNet, InceptionNet. Transfer Learning. Weight Initialization, Batch Normalization, Regularization. Applications in Vision, Speech, and Audio-Video."]],
-    [], "Deep Learning experiments 1, 2, 6, 7, 8, 9 are in Colab. Summaries not written yet."),
+    [], ""),
   "HMC 301": C("HMC-301","Professional Ethics",3,"B+",[
     ["Unit I","Human Values Morals, Values and Ethics, Integrity, Work Ethic, Respect for Others, Living Peacefully, Caring, Sharing, Honesty, Valuing Time, Co-operation, Commitment, Empathy, Self-Confidence, Character, Spirituality. Indian values (on the conceptual framework of Vedas): Purusharth, Niskama karma, Religion and Human Values, Towards a World Religion, Ethical Living and Harmony in Life."],
     ["Unit II","Profession and Professionalism, Ethical Theories: Kohlberg’s Theory, Gilligan’s Theory, Feminist Consequentialism, Moral Dilemmas, Types of Enquiries, Uses of Ethical Theories, Engineering Profession, Engineering Professionals- Training, Skill Set, Life Skills, Engineering Ethics: Making Senses and Issues, Ethical Obligations of Engineers, Ethical Codes for Engineers."],
@@ -420,8 +417,8 @@ const COURSES = {
     ["Unit II","Filtering in the Frequency Domain: Introduction to Fourier Transform and the frequency Domain, Smoothing and Sharpening Frequency Domain Filters. Image Restoration: A model of The Image Degradation / Restoration Process, Noise Models, Restoration in the presence of Noise Only Spatial Filtering, Periodic Noise Reduction by Frequency Domain Filtering, Estimation of Degradation Function, Inverse filtering, Wiener filtering, Constrained Least Square Filtering, Geometric Mean Filter, Geometric Transformations."],
     ["Unit III","Color Image Processing, Color fundamentals, Color Models, Pseudo color Image processing, Color Transforms, Smoothing and Sharpening, Color Segmentation Image Compression: fundamentals of compression, coding redundancy, Lossy and lossless compression, Spatial and temporal redundancy, Image compression models. Some basic compression methods. Image Segmentation: Detection of Discontinuities, Edge linking and boundary detection, Region Oriented Segmentation, Motion based segmentation."],
     ["Unit IV","Representation and Description: Representation, Boundary Descriptors, Regional Descriptors, Use of Principal Components for Description, Introduction to Morphology, Some basic Morphological Algorithms. Object Recognition: Patterns and Pattern Classes, Decision-Theoretic Methods, Structural Methods."]],
-    [], "DIP practicals are in Colab. Unit I and the lab summaries still to come."),
-  "BAI 322": C("BAI-322","Data Warehousing & BI",4,"B",[
+    [], ""),
+  "BAI 322": C("BAI-322","Data Warehousing and Business Intelligence",4,"B",[
     ["Unit I","Introduction to Data Warehousing: Overview, Difference between Database System and Data Warehouse, The Compelling Need for data warehousing, Data warehouse – The building Blocks: Defining Features, data warehouses and data marts, overview of the components, Three tier architecture, Metadata in the data warehouse. Data pre-processing:Data cleaning, Data transformation ETL Process. ETL tools. Defining the business requirements: Dimensional analysis, information packages – a new concept, requirements gathering methods, requirements definition: scope and content."],
     ["Unit II","Principles of Dimensional Modelling: Objectives, From Requirements to data design, Multi- Dimensional Data Model, Schemas: the STAR schema, the Snowflake schema, fact constellation schema. OLAP in the Data Warehouse: Demand for Online Analytical Processing, limitations of other analysis methods, OLAP definitions and rules, OLAP characteristics, major features and functions, hyper cubes. OLAP Operations: Drill-down and roll-up, slice-and-dice, pivot or rotation, OLAP models, overview of variations, the MOLAP model, the ROLAP model, ROLAP versus MOLAP, OLAP implementation considerations. Query and Reporting, Executive Information Systems (EIS), Data Warehouse and Business Strategy."],
     ["Unit III","Data Mining Basics: What is Data Mining, Data Mining Defined, The knowledge discovery process (KDD Process), Data Mining Applications- The Business Context of Data Mining, Data Mining for Process Improvement, Data Mining as a Research Tool, Data Mining for Marketing, Benefits of data mining, Major Data Mining Techniques: Classification and Prediction: Issues Regarding Classification and Prediction, Classification by Decision Tree Induction, KNN Algorithm."],
@@ -439,7 +436,7 @@ const COURSES = {
     ["two","Feed-forward network, same data. Where a model with no sense of locality stops improving."],
     ["three","Convolutional network, same data. The same task once the architecture knows neighbouring pixels belong together."],
     ["four","Transfer learning on Intel scene images. Six scene categories on a pretrained backbone rather than from scratch."],
-    ["five","Image captioning. Vision and language in one model, the point where Unit III stopped being theory."]], "Lab summaries are drafts and need your approval."),
+    ["five","Image captioning. Vision and language in one model, the point where Unit III stopped being theory."]], ""),
   "BAI 409": C("BAI-409","Conversational AI",4,"",[
     ["Unit I","Foundations: Introduction to Conversational AI, AI assistants and their platforms, types of AI assistants, AI assistant platforms, Primary use cases for AI assistant technology, self-service assistant, agent assist, classification and routing. Building Conversational AI: User’s Intent, Utterance, response, entity, combining intents andentities, contextualizing a response by using entities, responding with process flow, detecting low confidence, implementing confidence detection and the two-strikes rule."],
     ["Unit II","Designing Effective processes and Dialogue: Designing, Assembling, managing the design processand cross cutting design aspects. Dialogue, Reprompting, Disambiguation and Escalation Building a AI Assistant: AI assistant use cases, Conversational AI success metrics, Command interpreter success metrics, Event classifier success metrics."],
@@ -451,7 +448,7 @@ const COURSES = {
     ["three","Named entity recognition. Pulling the specifics out of the sentence."],
     ["four","Sentiment analysis. Reading tone alongside content."],
     ["five","A sequence-to-sequence chatbot. Generation rather than retrieval."],
-    ["six","Earshot, a voice chatbot. Speech recognition in, intent, spoken reply out: the whole stack assembled into one thing that answers back."]], "Lab summaries are drafts and need your approval."),
+    ["six","Earshot, a voice chatbot. Speech recognition in, intent, spoken reply out: the whole stack assembled into one thing that answers back."]], ""),
   "BAI 417": C("BAI-417","Multimodal Data Analytics",4,"",[
     ["Unit I","Introduction: Introduction to Multimodal data and applications, Multimodal Representation: two broad approaches, Joint and Coordinated. Challenges of multimodal data, Data collection & cleaning. Text Processing: Text normalization, Lemmatization, Morphology, Sub word tokenization; Text processing and statistics: TFIDF, BM-25, Zipf’s law, Hipf’s law; Language models and smoothing techniques; Vector space models."],
     ["Unit II","Speech Processing: Speech production and perception, Acoustic and articulatory phonetics; Short- term analysis: Need and windowing, Energy, Zero-crossing rate, Autocorrelation function, Fourier transform, Spectrogram; Short-term synthesis: Overlap-add method; Cepstrum analysis: Basis and development, mel- cepstrum."],
@@ -481,18 +478,18 @@ const COURSES = {
     ["Unit II","Cognitive Computing Algorithms: Machine Learning for Cognitive Systems Reinforcement Learning in Cognitive Computing Evolutionary Algorithms and Swarm Intelligence Natural Language Processing (NLP) in Cognitive Computing: Basics of Natural Language Processing NLP for Understanding and Generating Human-Like Text Sentiment Analysis and Language Models"],
     ["Unit III","Perception and Sensing: Computer Vision in Cognitive Computing Speech Recognition and Audio Processing Integrating Sensor Data for Cognitive Systems Human-Computer Interaction (HCI) in Cognitive Computing: Principles of HCI Designing User Interfaces for Cognitive Systems Multimodal Interaction: Combining Voice, Gesture, and Touch"],
     ["Unit IV","Cognitive Applications in Industry: Healthcare and Cognitive Computing Finance and Cognitive Analytics Smart Cities and Cognitive Technologies Ethical and Social Implications of Cognitive Computing: Privacy Concerns in Cognitive Systems Bias and Fairness in Cognitive Algorithms Ethical Design and Responsible AI"]],
-    [], "Semester 8, upcoming. Unit III is explicitly HCI, which is relevant to the Master's applications."),
-  "GEC 402": C("GEC-402","Cognitive Psychology",2,"",[],
-    [], "A Generic Open Elective is taken from a discipline outside the programme, chosen from a university-wide pool. The curriculum describes the category rather than fixed units, since the content comes from the department that offers it. Send me the handout for this one and I will add the units."),
-  "BAI 402": C("BAI-402","Social Media Analytics",4,"",[
+    [], "~Semester 8, upcoming."),
+  "GEC 402": C("GEC-402","Introduction to Cognitive Psychology by IIT Guwahati (NPTEL)",2,"",[],
+    [], "~Generic Open Elective, taken as an online course through NPTEL, offered by IIT Guwahati. Semester 8, upcoming."),
+  "BAI 404": C("BAI-404","Social Media Analytics",4,"",[
     ["Unit I","Introduction to Social Media Analytics (SMA): Social media landscape, Need for SMA; SMA in Small organizations; SMA in large organizations; Application of SMA in different areas Network fundamentals and models: The social networks perspective - nodes, ties and influencers, Social network and web data and methods. Graphs and Matrices- Basic measures for individuals and networks. Information visualization"],
     ["Unit II","Making connections: Link analysis. Random graphs and network evolution. Social contexts:Affiliation and identity. Web analytics tools: Clickstream analysis, A/B testing, online surveys, Web crawling and Indexing. Natural Language Processing Techniques for Micro-text Analysis"],
     ["Unit III","Facebook Analytics: Introduction, parameters, demographics. Analyzing page audience. Reach and Engagement analysis. Post- performance on FB. Social campaigns. Measuring and Analyzing social campaigns, defining goals and evaluating outcomes, Network Analysis. 9 (LinkedIn, Instagram, YouTube Twitter etc. Google analytics. Introduction. (Websites)."],
     ["Unit IV","Processing and Visualizing Data, Influence Maximization, Link Prediction, Collective Classification, Applications in Advertising and Game Analytics, Introduction to Python Programming, Collecting and analyzing social media data; visualization and exploration."]],
-    [], "Your record lists this as BAI-402. In the curriculum, BAI-402 is Augmented Reality and Virtual Reality and Social Media Analytics is BAI-404. The syllabus below is Social Media Analytics. Confirm which code is on your registration."),
+    [], "~Semester 8, upcoming."),
   "BAI 452": C("BAI-452","R&D Project",8,"",[],
     [], "~Industrial, R&D or Start-up Project, semester 8, 8 credits. Project work, so the curriculum carries no unit syllabus."),
-  "HMC 402": C("HMC-402","Entrepreneurship",3,"",[
+  "HMC 402": C("HMC-402","Creativity, Innovation and Entrepreneurship",3,"",[
     ["Unit I","Creative Thinking and Problem-Solving in AI: Techniques for fostering creativity in AI projects,Creative problem-solving frameworks and Brainstorming AI-driven business ideas. Innovation in AI: The innovation process in AI, Disruptive AI technologies and their impact."],
     ["Unit II","Ethical Considerations in AI: Ethical AI development principles, Discussion on AI bias, fairness,and transparency and Case studies on ethical AI dilemmas. AI Entrepreneurship: Introduction to entrepreneurship in the AI domain, Identifying AI-based business opportunities and Developing a business model canvas."],
     ["Unit III","Intellectual Property and AI: Protecting AI innovations through patents and copyright, Licensing AI technologies and Case studies on AI IP disputes. AI and Social Impact: AI for social good initiatives, Responsible AI development and deployment and Measuring the societal impact of AI ventures."],
